@@ -10,14 +10,14 @@ const name = process.argv[3];
 const number = process.argv[4];
 
 // Print out the password and URL for debugging
-console.log("Password:", password);
+// console.log("Password:", password);
 
-const url = `mongodb+srv://w4winnie97:${password}@cluster0.voebmho.mongodb.net/personApp`;
+// const url = `mongodb+srv://w4winnie97:${password}@cluster0.voebmho.mongodb.net/personApp`;
 
-console.log("MongoDB URL:", url); // Print the URL to check its format
+// console.log("MongoDB URL:", url); // Print the URL to check its format
 
 mongoose
-  .connect(url.toString(), {
+  .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
