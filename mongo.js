@@ -9,12 +9,25 @@ const password = process.argv[2];
 const name = process.argv[3];
 const number = process.argv[4];
 
+// Print out the password and URL for debugging
+console.log("Password:", password);
+
 const url = `mongodb+srv://w4winnie97:${password}@cluster0.voebmho.mongodb.net/personApp`;
 
-mongoose.connect(url, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+console.log("MongoDB URL:", url); // Print the URL to check its format
+
+mongoose
+  .connect(url, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log("Connected to MongoDB");
+  })
+  .catch((err) => {
+    console.error("Error connecting to MongoDB:", err.message);
+    process.exit(1);
+  });
 
 const personSchema = new mongoose.Schema({
   name: String,
@@ -37,7 +50,7 @@ if (name && number) {
       mongoose.connection.close();
     })
     .catch((err) => {
-      console.error("Error saving the person", err);
+      console.error("Error saving the person:", err.message);
       mongoose.connection.close();
     });
 } else {
@@ -51,7 +64,7 @@ if (name && number) {
       mongoose.connection.close();
     })
     .catch((err) => {
-      console.error("Error fetching persons", err);
+      console.error("Error fetching persons:", err.message);
       mongoose.connection.close();
     });
 }
