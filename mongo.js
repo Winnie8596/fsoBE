@@ -17,7 +17,7 @@ const url = `mongodb+srv://w4winnie97:${password}@cluster0.voebmho.mongodb.net/p
 console.log("MongoDB URL:", url); // Print the URL to check its format
 
 mongoose
-  .connect(url, {
+  .connect(url.toString(), {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
